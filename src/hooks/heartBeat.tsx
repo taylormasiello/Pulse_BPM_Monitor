@@ -1,5 +1,13 @@
 import React, {useState, useEffect } from 'react';
 
+// red if above 100 OR below 60;
+// checkbox for "are athelte?" - true=>diff const bmpMinAth used
+// checkbox for "are excercising?" - true=>diff const bmpMaxEx used
+// could add warning modals for specific thresholds
+
+const bpmMin = 35
+const bmpMax = 195
+
 function getRandomBMP(min: number, max: number){ //cannot declare as int, all integers are "numbers"
   var bpm = Math.random();
 
@@ -7,8 +15,17 @@ function getRandomBMP(min: number, max: number){ //cannot declare as int, all in
 
 }
 
+
+var bpm = getRandomBMP(bpmMin, bmpMax);
+
+
+function buzzBuzz(){
+  return bpm;
+
+}
+
 export function useHeartBeat() {
-  const [beat, setBeat] = useState(getRandomBMP(55, 115));
+  const [beat, setBeat] = useState(bpm);
   //const timer = setTimeout(() => )
 
   //changed beat + 1 to a random number between 60 and 100
