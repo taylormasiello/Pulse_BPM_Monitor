@@ -6,6 +6,7 @@ import * as Haptics from 'expo-haptics';
 // checkbox for "are excercising?" - true=>diff const bmpMaxEx used
 // could add warning modals for specific thresholds
 // add button to "mute warnings"/haptics
+// make stronger haptic feedback
 
 const bpmDangerMin = 35
 const bmpDangerMax = 195
@@ -28,9 +29,7 @@ const delay = (ms: number) => new Promise((finished) => setTimeout(finished, ms)
 const triggerBuzz = async () => {
   try {
     await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-    await delay(150); // changed to Error as Warning type was too subtle imo
-    //await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-    //await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+    await delay(150); //confirm buzz finishes
     console.log("Haptic engine succeed!")  
 
   } catch (error) {
@@ -38,18 +37,19 @@ const triggerBuzz = async () => {
   }
 };
 
-const triggerDangerBuzz = async (times: number) => {
-  try {
-    for (let i = 0; i < times; i++){
-    await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy); //Rigid is more more "sharp", Heavy is strongest type
-    await delay(150);
-    console.log("Haptic engine succeed!") 
-    } 
+// depriciated due to hardware limitations; no noticable difference in buzzing strength 
+// const triggerDangerBuzz = async (times: number) => {
+//   try {
+//     for (let i = 0; i < times; i++){
+//     await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy); //Rigid is more more "sharp", Heavy is strongest type
+//     await delay(150);
+//     console.log("Haptic engine succeed!") 
+//     } 
 
-  } catch (error) {
-    console.log("Haptic engine failed: ", error)
-  }
-};
+//   } catch (error) {
+//     console.log("Haptic engine failed: ", error)
+//   }
+// };
 
 const buzzBuzz = async () => {
   //if (bpm < 60 && isAthlete || bpm > 100 && isExercising) {
@@ -59,7 +59,7 @@ const buzzBuzz = async () => {
   if (bpm > 100 && bpm < 135 || bpm < 60 && bpm > 40) {
     await triggerBuzz();
   } else if (bpm > 135 || bpm < 40) {
-    await triggerDangerBuzz(5);
+    //await triggerDangerBuzz(5);
   }
 }
 
