@@ -1,4 +1,5 @@
-//file contains the "math logic"
+//"math logic" file
+import { DangerLevel  } from "../types";
 
 export const bpmDangerMin = 35
 export const bmpDangerMax = 195
@@ -8,12 +9,15 @@ export function getRandomBMP(min: number, max: number){
   return Math.floor(bpm * ((max - min + 1)) + min); // +1 makes it inclusive ; + min bumps math.random from 1 to the min value
 }
 
-export function isBPMDanger (currentBpm: number) { //don't use "set" as function names in react native as it's a signal for a state change not just a flag/boolean logic
-  var inDangerZone = false
+//refactor to accept obj like {isAthlete: boolean}
+export function isBPMDanger (currentBpm: number, dangerLevel: DangerLevel) { //don't use "set" as function names in react native as it's a signal for a state change not just a flag/boolean logic
+  //var dangerLevel = 'NONE';
 
   if (currentBpm > 100 || currentBpm < 60) {
-     inDangerZone = true
+     dangerLevel = 'HIGH';
   }
 
-  return inDangerZone
+  //will return more than just bool ; 3 levels of "danger"
+  //return inDangerZone
+  return dangerLevel;
 }

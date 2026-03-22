@@ -7,8 +7,9 @@ import { styles } from './src/styles/theme';
 // DONT FORGET TO REMOVE COMMENTS AND CONSOLE LOGS AT THE END OF THE PROJECT !!!
 
 export default function App() {
-  
+
   const { beat, isDanger } = useHeartBeat(); //const for "this render cycle" not "forever"
+  //init states for isAthlete and isExercising for user input
   
   return (
     <View style={styles.mainContainer}>
@@ -21,5 +22,5 @@ export default function App() {
   );
 }
 
-// "warning !!" will be made dynamic
+// "warning !!" will be made dynamic ; only displays when "high danger"
 
