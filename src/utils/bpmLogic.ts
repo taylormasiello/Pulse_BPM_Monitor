@@ -2,13 +2,13 @@
 import { DangerLevel, UserInputs  } from "../types";
 
 export const bpmDangerCeil = 35;
-export const bmpDangerFloor = 195;
+export const bpmDangerFloor = 195;
 
 const bpmNominalFloor = 60;
 const bpmNominalCeil = 100;
 
 const bpmAthleteFloor = 40;
-const bmpExerciseCeil = 150; 
+const bpmExerciseCeil  = 150; 
 //^more or less an "avg" for "highest safe bpm during exercise" for folks around 40-45 years old
 //^^an estimaged average point of potential users, given app is a "health monitor"; less likely to be used by younger users
 
@@ -17,23 +17,25 @@ export function getRandomBMP(min: number, max: number){
   return Math.floor(bpm * ((max - min + 1)) + min); // +1 makes it inclusive ; + min bumps math.random from 1 to the min value
 }
 
+//large scale isBPMDanger refactor makes it more "FDA audit ready"; refactored for readability + validation logic
 export function isBPMDanger (currentBpm: number, inputs: UserInputs) { //isAthlete is in UserInputs ; declaration
-  let dangerLevel: DangerLevel = 'NONE';
-  let isAthlete = inputs.isAthlete;
-  let isExercising = inputs.isExercising;
+  let dangerLevel: DangerLevel = 'NONE'; //let as will be reassigned within this scope
+  const isAthlete = inputs.isAthlete; //const "read only"; deconstructed from inputs
+  const isExercising = inputs.isExercising; //^same
 
-  let udrAthFl = (currentBpm < bpmAthleteFloor );
-  let udrExCeil = (currentBpm < bmpExerciseCeil);
-  let udrNomFl = (currentBpm < bpmNominalFloor);
+  //updated bool's to const as they are "read only" in this scope; avoids "logic drift"
+  const udrAthFl = (currentBpm < bpmAthleteFloor );
+  const udrExCeil = (currentBpm < bpmExerciseCeil );
+  const udrNomFl = (currentBpm < bpmNominalFloor);
 
-  let ovrAthFl = (currentBpm > bpmAthleteFloor);
-  let ovrExCeil = (currentBpm > bmpExerciseCeil);
-  let ovrNomCeil = (currentBpm > bpmNominalCeil);
+  const ovrAthFl = (currentBpm > bpmAthleteFloor);
+  const ovrExCeil = (currentBpm > bpmExerciseCeil);
+  const ovrNomCeil = (currentBpm > bpmNominalCeil);
  
-  let athelteExercisingEMG = ((isAthlete || isExercising) && (ovrExCeil || udrAthFl));
-  let athelteRestEMG = ((isAthlete && !isExercising) && (ovrNomCeil || udrAthFl));
-  let nonAthelteExercisingEMG = ((!isAthlete && isExercising) && (ovrExCeil || udrNomFl));
-  let nonAthleteRestEMG = ((!isAthlete && !isExercising) && (ovrNomCeil || udrNomFl));
+  const athelteExercisingEMG = ((isAthlete || isExercising) && (ovrExCeil || udrAthFl));
+  const athelteRestEMG = ((isAthlete && !isExercising) && (ovrNomCeil || udrAthFl));
+  const nonAthelteExercisingEMG = ((!isAthlete && isExercising) && (ovrExCeil || udrNomFl));
+  const nonAthleteRestEMG = ((!isAthlete && !isExercising) && (ovrNomCeil || udrNomFl));
 
   if (athelteExercisingEMG || athelteRestEMG || nonAthelteExercisingEMG || nonAthleteRestEMG) {
     dangerLevel = 'EMG'; //high priority

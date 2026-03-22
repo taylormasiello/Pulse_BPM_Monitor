@@ -14,7 +14,11 @@ export default function App() {
   const { beat, isDanger } = useHeartBeat(); //const "immutable for this render"
   const [isAthelte, setIsAthlete] = useState(false);
   const [isExercising, setIsExercising] = useState(false);
-
+  
+  //function state updates/updater functions; queues updater to be executed in next render
+  //^when react processes queue, passes most recent "pending state" as "previous"
+  //^^queue model confirms setters always using most current state, here from user inputs
+  //^^^avoids bugs from asynchornous states like stale state; prevents race conditions
   const toggleIsAthlete = () => setIsAthlete(previousState => !previousState);
   const toggleIsExercising = () => setIsExercising(previousState => !previousState);
   
