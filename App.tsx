@@ -4,13 +4,11 @@ import { Text, View } from 'react-native';
 import { useHeartBeat } from './src/hooks/heartBeat';
 import { styles } from './src/styles/theme';
 
-
-export default function App() {
-
 // DONT FORGET TO REMOVE COMMENTS AND CONSOLE LOGS AT THE END OF THE PROJECT !!!
 
+export default function App() {
+  
   const { beat, isDanger } = useHeartBeat(); //const for "this render cycle" not "forever"
-  //var isDanger = false
   
   return (
     <View style={styles.mainContainer}>
@@ -18,9 +16,10 @@ export default function App() {
       <Text style={styles.medTitlePurple}>Hello Alex!</Text>
       <Text style={styles.smallTitleDarkYellow}>My beats so far are:</Text>
       <Text style={[styles.normalGreen, isDanger && styles.dangerRed]}>{beat}</Text>
-      <Text style={styles.warningOrange}>!! Warning !!</Text> {/*will be dynamic*/}
+      <Text style={styles.warningOrange}>!! Warning!!</Text>
     </View>
   );
 }
 
+// "warning !!" will be made dynamic
 

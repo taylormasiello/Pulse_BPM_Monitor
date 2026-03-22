@@ -1,7 +1,5 @@
 import { StyleSheet } from 'react-native';
 
-//future considerations : dark mode
-
 export const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
@@ -46,5 +44,3 @@ export const styles = StyleSheet.create({
     fontSize: 63,
   },
 });
-
-//style={[styles.baseText, isDanger && styles.redText, isAthlete && styles.athleteOverride]}
