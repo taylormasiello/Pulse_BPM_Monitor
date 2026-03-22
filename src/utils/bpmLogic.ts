@@ -19,18 +19,16 @@ export function getRandomBMP(min: number, max: number){
 
 export function isBPMDanger (currentBpm: number, inputs: UserInputs) { //isAthlete is in UserInputs ; declaration
   let dangerLevel: DangerLevel = 'NONE';
-
   let isAthlete = inputs.isAthlete;
   let isExercising = inputs.isExercising;
 
   let udrAthFl = (currentBpm < bpmAthleteFloor );
   let udrExCeil = (currentBpm < bmpExerciseCeil);
   let udrNomFl = (currentBpm < bpmNominalFloor);
-  //let udrNomCeil = (currentBpm < bpmNominalCeil);
 
-  let ovrNomCeil = (currentBpm > bpmNominalCeil);
   let ovrAthFl = (currentBpm > bpmAthleteFloor);
   let ovrExCeil = (currentBpm > bmpExerciseCeil);
+  let ovrNomCeil = (currentBpm > bpmNominalCeil);
  
   let athelteExercisingEMG = ((isAthlete || isExercising) && (ovrExCeil || udrAthFl));
   let athelteRestEMG = ((isAthlete && !isExercising) && (ovrNomCeil || udrAthFl));
@@ -51,5 +49,5 @@ export function isBPMDanger (currentBpm: number, inputs: UserInputs) { //isAthle
       return dangerLevel = 'NONE'; //low priority
   }
 
-  return 'NONE'; //default return ; catch block
+  return 'NONE'; //default return; catch block
 }

@@ -8,6 +8,7 @@ const isExercising = false
 
 // future considerations:
 // add isAthelte/isExercising checkboxes (for specific threshold logic)
+// input space to update "user" in App.tsx via user input (can set name on screen)
 
 // future considerations : dark mode
 // add age considerations for isExercising (changes based on age range)
