@@ -1,5 +1,5 @@
 import {useState, useEffect } from 'react';
-import { getRandomBMP, isBPMDanger, bpmDangerMin, bmpDangerMax } from '../utils/bpmLogic';
+import { getRandomBMP, isBPMDanger, bmpDangerFloor, bpmDangerCeil } from '../utils/bpmLogic';
 import { buzzBuzz } from '../services/hapticsService';
 import { DangerLevel  } from "../types";
 
@@ -8,18 +8,10 @@ const isExercising = false
 
 // future considerations:
 // add isAthelte/isExercising checkboxes (for specific threshold logic)
+
 // future considerations : dark mode
+// add age considerations for isExercising (changes based on age range)
 // ??? add button to "mute warnings"/haptics
-
-//furture buzzBuzz() logic
-  //if (bpm > 100 && bpm < 135 || bpm < 60 && bpm > 40) {
-  //} else if (bpm > 135 || bpm < 40) {
-    //await triggerDangerBuzz(5);
-   // super red styling
-  //if (bpm < 60 && isAthlete || bpm > 100 && isExercising) {
-    //no trigger DangerBuzz
-  //}
-
 
 //calculate logic before updating the state
 export function useHeartBeat() {
@@ -28,7 +20,7 @@ export function useHeartBeat() {
 
    useEffect (() => { //"constructor" ; updates every render except w/ dependancy array: empty runs once on mount ; with props: runs on mount and when props state change between renders
     const beatTimer = setTimeout(() => { //keep logic inside setTimeout
-      const nextBPM = getRandomBMP(bpmDangerMin, bmpDangerMax); //internal telemetry variable
+      const nextBPM = getRandomBMP(bmpDangerFloor, bpmDangerCeil); //internal telemetry variable
       const isDangerous = isBPMDanger(nextBPM, DangerLevel); 
 
       setDanger(isDangerous); //danger state changed
