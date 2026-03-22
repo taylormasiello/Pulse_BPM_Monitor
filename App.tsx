@@ -2,18 +2,21 @@ import React from 'react';
 import { Text, View } from 'react-native';
 
 import { useHeartBeat } from './src/hooks/heartBeat';
-import * as Theme from './src/styles/theme';
+import { styles } from './src/styles/theme';
 
 
 export default function App() {
 
+// DONT FORGET TO REMOVE COMMENTS AND CONSOLE LOGS AT THE END OF THE PROJECT !!!
+
   const { beat } = useHeartBeat();
   
   return (
-    <View style={Theme.styles.mainContainer}>
-      <Text style={Theme.styles.bigTitleBlack}>Tay's Heart Beat Monitor</Text>
-      <Text style={Theme.styles.smallTitleBlue}>Hello Alex!</Text>
-      <Text style={Theme.styles.dangerRed}>My beats so far are: {beat}</Text>
+    <View style={styles.mainContainer}>
+    {/*debug line: <View style={{ flex: 1, backgroundColor: 'red' }}>*/}
+      <Text style={styles.bigTitleBlack}>Tay's Heart Beat Monitor</Text>
+      <Text style={styles.smallTitleBlue}>Hello Alex!</Text>
+      <Text style={styles.dangerRed}>My beats so far are: {beat}</Text>
     </View>
   );
 }
