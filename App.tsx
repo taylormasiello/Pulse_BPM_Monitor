@@ -14,19 +14,10 @@ export default function App() {
   return (
     <View style={styles.mainContainer}>
     {/*debug line: <View style={{ flex: 1, backgroundColor: 'red' }}>*/}
-      <Text style={styles.bigTitleBlack}>Tay's Heart Beat Monitor</Text>
-      <Text style={styles.smallTitleBlue}>Hello Alex!</Text>
-      <Text style={styles.dangerRed}>My beats so far are: {beat}</Text>
+      <Text style={styles.bigTitleBlue}>Tay's Heart Beat Monitor</Text>
+      <Text style={styles.medTitleGreen}>Hello Alex!</Text>
+      <Text style={styles.smallTitleOrange}>My beats so far are:</Text>
+      <Text style={styles.dangerRed}>{beat}</Text>
     </View>
   );
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
-//  style={styles.container}
