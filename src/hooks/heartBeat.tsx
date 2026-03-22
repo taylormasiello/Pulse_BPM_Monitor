@@ -20,8 +20,6 @@ import * as Haptics from 'expo-haptics';
 const isAthlete = false
 const isExercising = false
 
-var isDanger = false
-
 const bpmDangerMin = 35
 const bmpDangerMax = 195
 
@@ -42,29 +40,44 @@ const triggerBuzz = async () => {
   }
 };
 
-const buzzBuzz = async (currentBpm: number) => {
+export function setIsDanger (currentBpm: number) {
+  var inDangerZone = false
+
   if (currentBpm > 100 || currentBpm < 60) {
-    isDanger = true;
+     inDangerZone = true
+  }
+
+  return inDangerZone
+}
+
+const buzzBuzz = async (currentBpm: number) => {
+  if (setIsDanger(currentBpm)) {
     await triggerBuzz();
-    // red stylinging   
- } else {
-    isDanger = false;
  }
 };
 
+//calculate logic before updating the state
 
 export function useHeartBeat() {
-  const [beat, setBeat] = useState(70); //safe starting value
+  const [beat, setBeat] = useState(70); //sets beat value for the UI in app.tsx
+  const [ isDanger, setDanger ] = useState(false); //default value
+
+  //const nextBPM = getRandomBMP(bpmDangerMin, bmpDangerMax)
 
   useEffect (() => {
-    const beatTimer = setTimeout(() => { 
-      setBeat((getRandomBMP(bpmDangerMin, bmpDangerMax)));
+    const beatTimer = setTimeout(() => { //keep logic inside setTimeout
+      const nextBPM = getRandomBMP(bpmDangerMin, bmpDangerMax); //internal telemetry variable
+      //setIsDanger(nextBPM); //inDangerFlag
+      setDanger(setIsDanger(nextBPM)); //informs react danger state flag changed
+      setBeat(nextBPM); //informs react native beat state has changed
+      buzzBuzz(nextBPM);
     }, 1000);
 
-    buzzBuzz(beat);
-
+    //var isDanger = bpmRangeCheck(nextBPM);
+    //buzzBuzz(beat);
+    
     return () => clearTimeout(beatTimer);
-  }, [beat, isDanger]);
+  }, [beat]);
 
   //buzzBuzz();
 
