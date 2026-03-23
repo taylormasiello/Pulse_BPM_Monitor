@@ -1,6 +1,6 @@
-# Pulse HeartBeat Monitor App (In-Progress)
+## Pulse HeartBeat Monitor App (In-Progress)
 
-## HeartBeat Monitor App
+### HeartBeat Monitor App
 
 ### Built in React Native - (MVP Complete)
 
