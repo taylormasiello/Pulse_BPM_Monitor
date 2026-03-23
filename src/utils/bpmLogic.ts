@@ -56,5 +56,5 @@ export function isBPMDanger (currentBpm: number, inputs: UserInputs) {
       return dangerLevel = 'NONE';
   }
 
-  return 'NONE'; // catch; if bpm not caught in EMG || HIGH, will be treated as NONE
+  return 'NONE'; // catch; if bpm falls through logic checks, will be treated as NONE
 }

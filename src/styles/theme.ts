@@ -14,7 +14,12 @@ export const styles = StyleSheet.create({
     gap: 20,
   },
   medTitlePurple: {
-    color: '#710e71',
+    color: '#7d127d',
+    fontWeight: 'bold',
+    fontSize: 23,
+  },
+  userNamePurple: {
+    color: '#5a075a',
     fontWeight: 'bold',
     fontSize: 25,
   },

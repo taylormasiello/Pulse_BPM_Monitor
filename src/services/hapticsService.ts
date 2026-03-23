@@ -16,16 +16,9 @@ export const triggerBuzz = async () => {
 };
 
 export const buzzBuzz = async (currentBpm: number, inputs: UserInputs, danger: DangerLevel) => {
-  //danger = isBPMDanger(currentBpm, inputs)
-  //if (danger === 'EMG' || danger === 'HIGH')
   if (danger === 'EMG')
   {
     await triggerBuzz();
   }
 };
-
-//   if (isBPMDanger(currentBpm, inputs)) {
-//     await triggerBuzz();
-//  }
-
 

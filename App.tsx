@@ -9,7 +9,7 @@
 // DONT FORGET TO REMOVE COMMENTS AND CONSOLE LOGS AT THE END OF THE PROJECT !!!
 
 import React, { useState } from 'react';
-import { Text, View, Switch } from 'react-native';
+import { Text, View, Switch, TextInput } from 'react-native';
 import { useHeartBeat } from './src/hooks/heartBeat';
 import { styles } from './src/styles/theme';
 import { DangerLevel, UserInputs } from "./src/types"; //DangerLevel
@@ -24,8 +24,9 @@ export default function App(inputs: UserInputs) { //inputs are from user inputs 
   }
   
   //text box input to update this string variable !
-  let user = "Alex";
+  //let user = "Alex";
 
+  const [userName, setUserName] = useState('Alex');
   const [isAthlete, setIsAthlete] = useState<boolean>(inputUpdate.isAthlete); //need <boolean> for setters w/ arrow function below
   const [isExercising, setIsExercising] = useState<boolean>(inputUpdate.isExercising);
 
@@ -38,7 +39,7 @@ export default function App(inputs: UserInputs) { //inputs are from user inputs 
     isExercising: isExercising,
   }
   
-  const { beat, isDanger } = useHeartBeat(newInputs); //takes in updated from user inputs UserInputs obj
+  const { beat, isDanger } = useHeartBeat(newInputs); //takes in updated from user inputs UserInputs
 
   //isDanger conditional styling logic; returns STYLE COLOR not dangerLevel
   function checkDangerLevel(danger: DangerLevel){
@@ -63,8 +64,13 @@ export default function App(inputs: UserInputs) { //inputs are from user inputs 
   return ( //refeactored "warning" to be "invisible" instead of "destroyed" to fix "jumping UI" bug
     <View style={styles.mainContainer}>
       <Text style={styles.bigTitleBlue}>Tay's Heart Beat Monitor</Text>
-      <Text style={styles.medTitlePurple}>Hello {user}!</Text>
-
+      <Text style={styles.medTitlePurple}>Hello 
+        <TextInput
+          style={styles.userNamePurple}
+          onChangeText={setUserName}
+          value={userName}
+        />
+       !</Text>
       <View>
         <Text style={styles.smallTitleDarkGreen}>"Check if you're an Athlete:</Text>
         <Switch onValueChange={() => toggleIsAthlete()} value={isAthlete}/>
@@ -76,9 +82,14 @@ export default function App(inputs: UserInputs) { //inputs are from user inputs 
 
       <Text style={styles.smallTitleDarkYellow}>My beats so far are:</Text>
       <Text style={checkDangerLevel((dangerCheck))}>{beat}</Text>
-      <Text style={(isDanger === 'EMG') ? styles.warnDarkRed : styles.warnInvisible}>"!! Warning !!"</Text>
+      <Text style={(isDanger === 'EMG') ? styles.warnDarkRed : styles.warnInvisible}>!! Warning !!</Text>
     </View>
   );
 };
 
-//(isDanger === 'EMG') ? <Text style={styles.warnDarkRed}>!! Warning !!</Text> : null
+//<Text style={styles.medTitlePurple}>Hello {user}!</Text>
+//<TextInput
+          //style={styles.medTitlePurple}
+          //onChangeText={setUserName}
+          //value={userName}
+      //>
