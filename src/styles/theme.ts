@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-  mainContainer: {
-    flex: 1,
+  scrollViewSheet: {
+    flexGrow: 1,
     backgroundColor: '#d5d9be', //light yellow 
     alignItems: 'center', 
     justifyContent: 'center', 
@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
     marginTop: 30,
   },
   userNameInput: {
-    height: 60,
+    height: 65,
     width: '80%',
     borderColor: '#2E5A88', 
     borderWidth: 2,
