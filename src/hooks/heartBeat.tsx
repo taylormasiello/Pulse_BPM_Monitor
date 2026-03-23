@@ -1,7 +1,7 @@
 import {useState, useEffect } from 'react';
 import { getRandomBMP, isBPMDanger, bpmDangerFloor, bpmDangerCeil } from '../utils/bpmLogic';
 import { buzzBuzz } from '../services/hapticsService';
-import { UserInputs  } from "../types"; //DangerLevel
+import { UserInputs  } from "../types";
 
 //calculate logic before updating the state
 export function useHeartBeat(inputs: UserInputs) { //inputs needs to be passed in as arg since comes from UI, user inputs

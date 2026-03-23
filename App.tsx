@@ -15,17 +15,12 @@ import { styles } from './src/styles/theme';
 import { DangerLevel, UserInputs } from "./src/types"; //DangerLevel
 
 export default function App(inputs: UserInputs) { //inputs are from user inputs (before new change that may happen within this function)
-  //init states for isAthlete and isExercising for user input to update
-  
   //"default" inputObj from inputs arg
   var inputUpdate: UserInputs = {
     isAthlete: inputs.isAthlete,
     isExercising: inputs.isExercising,
   }
   
-  //text box input to update this string variable !
-  //let user = "Alex";
-
   const [userName, setUserName] = useState(""); //left empty replaced with placeholde text for better UX
   const [isAthlete, setIsAthlete] = useState<boolean>(inputUpdate.isAthlete); //need <boolean> for setters w/ arrow function below
   const [isExercising, setIsExercising] = useState<boolean>(inputUpdate.isExercising);
@@ -87,7 +82,6 @@ export default function App(inputs: UserInputs) { //inputs are from user inputs 
             placeholder="Your Name?"
             placeholderTextColor={'#7d127d'}
             onChangeText={setUserName}
-            //value={userName}
           />
         </View>
 
@@ -103,15 +97,3 @@ export default function App(inputs: UserInputs) { //inputs are from user inputs 
     </KeyboardAvoidingView>
   );
 };
-
-//<Text style={styles.medTitlePurple}>Hello {user}!</Text>
-//<TextInput
-          //style={styles.medTitlePurple}
-          //onChangeText={setUserName}
-          //value={userName}
-      //>
-
-      
-      // <Text style={styles.smallTitleDarkYellow}>My beats so far are:</Text>
-      // <Text style={checkDangerLevel((dangerCheck))}>{beat}</Text>
-      // <Text style={(isDanger === 'EMG') ? styles.warnDarkRed : styles.warnInvisible}>!! Warning !!</Text>
